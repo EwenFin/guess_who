@@ -19,6 +19,7 @@ class GameContainer extends React.Component{
     selectedCharacteristic: null,
     selectedOption: null,
     selectedCharacter: null,
+    chosenCharacter: null,
     characters: [{name: "Bob", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/1.png'}, {name: "Claire", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/2.png'}, {name: "Fiona", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat: false, mask: 'false', img:'../img/3.png'}, {name: "Suzy", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/4.png'}, {name: "Anne", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/5.png'}, {name: "Andy", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/6.png'}, {name: "Nick", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/7.png'}, {name: "Cat", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/8.png'}, {name: "Gail", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/9.png'}, {name: "Mike", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/10.png'}, {name: "Simon", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/11.png'}, {name: "Adam", hairColour: 'no hair', eyeColour: 'blue', glasses:true, hat:false, mask: 'false', img:'../img/12.png'}]
     }
   }
@@ -27,14 +28,29 @@ class GameContainer extends React.Component{
 
 setSelectedCharacteristic(characteristic){
   this.setState({selectedCharacteristic: characteristic})
+  console.log(characteristic)
+  console.log(this.state.selectedCharacteristic)
 }
 
 setSelectedOption(option){
   this.setState({selectedOption: option})
+  console.log(option)
 }
 
 setSelectedCharacter(character){
   this.setState({selectedCharacter: character})
+}
+
+componentDidMount(){
+  const character = this.state.characters[Math.floor(Math.random() * 12)]
+  this.setState({chosenCharacter: character})
+}
+
+question(){
+  const characteristic = this.state.selectedCharacteristic
+  const option = this.state.selectedOption
+  console.log(characteristic, option)
+
 }
 
 render(){
@@ -45,7 +61,7 @@ render(){
 
       <OptionsSelector  selectedCharacteristic = {this.state.selectedCharacteristic} hair = {this.state.hair} eyes = {this.state.eyes} glasses = {this.state.glasses} hat= {this.state.hat} mask = {this.state.mask} setSelectedOption ={this.setSelectedOption.bind(this)}/>
 
-      <button id ="question">Question</button>
+      <button id ="question" onClick={this.question}>Question</button>
       <button id ="guess">Guess</button>
 
       <CharacterSelector characters = {this.state.characters} setSelectedCharacter = {this.setSelectedCharacter.bind(this)}/>
