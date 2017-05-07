@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Board from '../components/Board.jsx'
+import Characters from '../components/Characters.jsx'
 import CharacteristicSelector from '../components/CharacteristicSelector.jsx'
 import OptionsSelector from '../components/OptionsSelector.jsx'
 
@@ -8,15 +8,15 @@ class GameContainer extends React.Component{
   constructor(props){
   super(props);
   this.state = {
-    characteristics:['hair colour', 'eye colour', 'glasses', 'hat', 'Brexit vote' ],
-    hair:['blonde', 'brown', 'ginger', 'black', 'grey'],
+    characteristics:['hair colour', 'eye colour', 'glasses', 'hat', 'mask' ],
+    hair:['blonde', 'brown', 'ginger', 'black', 'no hair!'],
     eyes:['brown', 'green', 'blue','grey'],
     glasses:[true, false],
     hat:[true, false],
-    Brexit:['remain','leave'],
+    mask:[true,false],
     winner: null,
     selectedCharacteristic: null,
-    selectedOption:null
+    selectedOption: null
     }
   }
 
@@ -33,9 +33,13 @@ setSelectedOption(option){
 render(){
   return(
     <div>
+      <Characters/>
       <CharacteristicSelector characteristics = {this.state.characteristics}setSelectedCharacteristic ={this.setSelectedCharacteristic.bind(this)}/>
 
-      <OptionsSelector  selectedCharacteristic = {this.state.selectedCharacteristic} hair = {this.state.hair} eyes = {this.state.eyes} glasses = {this.state.glasses} hat= {this.state.hat} brexit = {this.state.Brexit} setSelectedOption ={this.setSelectedOption.bind(this)}/>
+      <OptionsSelector  selectedCharacteristic = {this.state.selectedCharacteristic} hair = {this.state.hair} eyes = {this.state.eyes} glasses = {this.state.glasses} hat= {this.state.hat} mask = {this.state.mask} setSelectedOption ={this.setSelectedOption.bind(this)}/>
+
+      <button id ="question">Question</button>
+      <button id ="guess">Guess</button>
     </div>
     )
 }
